@@ -5,13 +5,13 @@ VERSION=0.1.0
 mkdir -p builds
 
 GOOS=linux   GOARCH=amd64  go build
-tar czf builds/blazectl-${VERSION}-linux-amd64.tar.gz blazectl
-rm blazectl
+tar czf builds/bbmri-fhir-gen-${VERSION}-linux-amd64.tar.gz bbmri-fhir-gen
+rm bbmri-fhir-gen
 
 GOOS=darwin  GOARCH=amd64  go build
-tar czf builds/blazectl-${VERSION}-darwin-amd64.tar.gz blazectl
-rm blazectl
+tar czf builds/bbmri-fhir-gen-${VERSION}-darwin-amd64.tar.gz bbmri-fhir-gen
+rm bbmri-fhir-gen
 
 GOOS=windows GOARCH=amd64  go build
-zip -q builds/blazectl-${VERSION}-windows-amd64.zip blazectl.exe
-rm blazectl.exe
+zip -q builds/bbmri-fhir-gen-${VERSION}-windows-amd64.zip bbmri-fhir-gen.exe
+rm bbmri-fhir-gen.exe
