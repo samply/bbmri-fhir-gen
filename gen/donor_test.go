@@ -23,7 +23,7 @@ import (
 func TestDonor(t *testing.T) {
 	patient := Donor(rand.New(rand.NewSource(0)), 0)
 	assert.Equal(t,
-		"https://fhir.bbmri.de/StructureDefinition/Donor",
+		"https://fhir.bbmri.de/StructureDefinition/BbmriDonor",
 		patient["meta"].(Object)["profile"].(Array)[0])
 	assert.Equal(t, "0", patient["id"])
 }
