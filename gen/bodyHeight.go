@@ -20,14 +20,14 @@ import (
 	"time"
 )
 
-func BodyHeight(donorIdx int, date time.Time, value float64) Object {
+func BodyHeight(patientIdx int, date time.Time, value float64) Object {
 	return Object{
 		"resourceType":      "Observation",
-		"id":                fmt.Sprintf("%d-body-height", donorIdx),
-		"meta":              meta("https://fhir.bbmri.de/StructureDefinition/BbmriBodyHeight"),
+		"id":                fmt.Sprintf("%d-body-height", patientIdx),
+		"meta":              meta("https://fhir.bbmri.de/StructureDefinition/BodyHeight"),
 		"status":            "final",
 		"category":          Array{vitalSigns},
-		"subject":           reference("Patient", donorIdx),
+		"subject":           reference("Patient", patientIdx),
 		"code":              codeableConcept(coding("http://loinc.org", "8302-2")),
 		"effectiveDateTime": date.Format("2006-01-02"),
 		"valueQuantity":     quantity(value, "cm"),

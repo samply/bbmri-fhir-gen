@@ -19,14 +19,14 @@ import (
 	"time"
 )
 
-func BodyWeight(donorIdx int, date time.Time, value float64) Object {
+func BodyWeight(patientIdx int, date time.Time, value float64) Object {
 	return Object{
 		"resourceType":      "Observation",
-		"id":                fmt.Sprintf("%d-body-weight", donorIdx),
-		"meta":              meta("https://fhir.bbmri.de/StructureDefinition/BbmriBodyWeight"),
+		"id":                fmt.Sprintf("%d-body-weight", patientIdx),
+		"meta":              meta("https://fhir.bbmri.de/StructureDefinition/BodyWeight"),
 		"status":            "final",
 		"category":          Array{vitalSigns},
-		"subject":           reference("Patient", donorIdx),
+		"subject":           reference("Patient", patientIdx),
 		"code":              codeableConcept(coding("http://loinc.org", "29463-7")),
 		"effectiveDateTime": date.Format("2006-01-02"),
 		"valueQuantity":     quantity(value, "kg"),

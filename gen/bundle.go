@@ -24,7 +24,7 @@ import (
 func Bundle(r *rand.Rand, start int, n int) Object {
 	entries := make(Array, 0, n)
 	for i := start; i < start+n; i++ {
-		entries = append(entries, entry(Donor(r, i)))
+		entries = append(entries, entry(Patient(r, i)))
 
 		encounterDate := randDate(r, 2000, 2018)
 		bmi := RandBmiValue(r)

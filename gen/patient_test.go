@@ -20,30 +20,30 @@ import (
 	"testing"
 )
 
-func TestDonor(t *testing.T) {
-	patient := Donor(rand.New(rand.NewSource(0)), 0)
+func TestPatient(t *testing.T) {
+	patient := Patient(rand.New(rand.NewSource(0)), 0)
 	assert.Equal(t,
-		"https://fhir.bbmri.de/StructureDefinition/BbmriDonor",
+		"https://fhir.bbmri.de/StructureDefinition/Patient",
 		patient["meta"].(Object)["profile"].(Array)[0])
 	assert.Equal(t, "0", patient["id"])
 }
 
-func TestDonor_0(t *testing.T) {
-	patient := Donor(rand.New(rand.NewSource(0)), 0)
+func TestPatient_0(t *testing.T) {
+	patient := Patient(rand.New(rand.NewSource(0)), 0)
 	assert.Equal(t, "male", patient["gender"])
 	assert.Equal(t, "1989-11-18", patient["birthDate"])
 	assert.Nil(t, patient["deceasedDateTime"])
 }
 
-func TestDonor_1(t *testing.T) {
-	patient := Donor(rand.New(rand.NewSource(1)), 0)
+func TestPatient_1(t *testing.T) {
+	patient := Patient(rand.New(rand.NewSource(1)), 0)
 	assert.Equal(t, "female", patient["gender"])
 	assert.Equal(t, "1953-11-30", patient["birthDate"])
 	assert.Equal(t, "1994-02-25", patient["deceasedDateTime"])
 }
 
-func TestDonor_2(t *testing.T) {
-	patient := Donor(rand.New(rand.NewSource(2)), 0)
+func TestPatient_2(t *testing.T) {
+	patient := Patient(rand.New(rand.NewSource(2)), 0)
 	assert.Equal(t, "male", patient["gender"])
 	assert.Equal(t, "1969-08-10", patient["birthDate"])
 	assert.Nil(t, patient["deceasedDateTime"])

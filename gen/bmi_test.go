@@ -28,7 +28,7 @@ func TestBmi(t *testing.T) {
 	}
 	bmi := Bmi(0, date, 42.0)
 	assert.Equal(t,
-		"https://fhir.bbmri.de/StructureDefinition/BbmriBmi",
+		"https://fhir.bbmri.de/StructureDefinition/Bmi",
 		bmi["meta"].(Object)["profile"].(Array)[0])
 	assert.Equal(t, "0-bmi", bmi["id"])
 	assert.Equal(t, "2019-07-30", bmi["effectiveDateTime"])

@@ -20,14 +20,14 @@ import (
 	"time"
 )
 
-func Bmi(donorIdx int, date time.Time, value float64) Object {
+func Bmi(patientIdx int, date time.Time, value float64) Object {
 	return Object{
 		"resourceType":      "Observation",
-		"id":                fmt.Sprintf("%d-bmi", donorIdx),
-		"meta":              meta("https://fhir.bbmri.de/StructureDefinition/BbmriBmi"),
+		"id":                fmt.Sprintf("%d-bmi", patientIdx),
+		"meta":              meta("https://fhir.bbmri.de/StructureDefinition/Bmi"),
 		"status":            "final",
 		"category":          Array{vitalSigns},
-		"subject":           reference("Patient", donorIdx),
+		"subject":           reference("Patient", patientIdx),
 		"code":              codeableConcept(coding("http://loinc.org", "39156-5")),
 		"effectiveDateTime": date.Format("2006-01-02"),
 		"valueQuantity":     quantity(value, "kg/m2"),

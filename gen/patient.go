@@ -20,22 +20,22 @@ import (
 	"time"
 )
 
-func Donor(r *rand.Rand, idx int) Object {
-	donor := make(map[string]interface{})
-	donor["resourceType"] = "Patient"
-	donor["id"] = fmt.Sprint(idx)
-	donor["meta"] = meta("https://fhir.bbmri.de/StructureDefinition/BbmriDonor")
-	donor["gender"] = randGender(r)
+func Patient(r *rand.Rand, idx int) Object {
+	patient := make(map[string]interface{})
+	patient["resourceType"] = "Patient"
+	patient["id"] = fmt.Sprint(idx)
+	patient["meta"] = meta("https://fhir.bbmri.de/StructureDefinition/Patient")
+	patient["gender"] = randGender(r)
 
 	birthDate := randDate(r, 1950, 2000)
-	donor["birthDate"] = birthDate.Format("2006-01-02")
+	patient["birthDate"] = birthDate.Format("2006-01-02")
 
 	deceasedDate := birthDate.Add(randAge(r))
 	if deceasedDate.Before(time.Now()) {
-		donor["deceasedDateTime"] = deceasedDate.Format("2006-01-02")
+		patient["deceasedDateTime"] = deceasedDate.Format("2006-01-02")
 	}
 
-	return donor
+	return patient
 }
 
 func randGender(r *rand.Rand) string {
