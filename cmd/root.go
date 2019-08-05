@@ -26,7 +26,7 @@ import (
 	"path/filepath"
 )
 
-var start, n int
+var start, n, txSize int
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -47,16 +47,20 @@ FHIR® Patient, Observation and Specimen resources are generated.`,
 
 		r := rand.New(rand.NewSource(0))
 
-		bytes, err := json.MarshalIndent(gen.Bundle(r, start, n), "", "  ")
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+		if n < txSize {
+			err := genTxFile(dir, r, start, n)
+			if err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
 		}
 
-		err = ioutil.WriteFile(filepath.Join(dir, "transaction-0.json"), bytes, 0644)
-		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+		for i := start; i < n; i += txSize {
+			err := genTxFile(dir, r, i, txSize)
+			if err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
 		}
 	},
 }
@@ -71,8 +75,9 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.Flags().IntVarP(&start, "start", "s", 0, "Patient index to start with")
-	rootCmd.Flags().IntVarP(&n, "num", "n", 100, "Number of patients to generate")
+	rootCmd.Flags().IntVarP(&start, "start", "s", 0, "patient index to start with")
+	rootCmd.Flags().IntVarP(&n, "num", "n", 100, "number of patients to generate")
+	rootCmd.Flags().IntVar(&txSize, "tx-size", 100, "number of patients per transaction")
 }
 
 func checkDir(dir string) error {
@@ -83,4 +88,18 @@ func checkDir(dir string) error {
 	} else {
 		return nil
 	}
+}
+
+func genTxFile(dir string, r *rand.Rand, start, n int) error {
+	bytes, err := json.MarshalIndent(gen.Bundle(r, start, n), "", "  ")
+	if err != nil {
+		return err
+	}
+
+	filename := fmt.Sprintf("transaction-%d.json", start)
+	err = ioutil.WriteFile(filepath.Join(dir, filename), bytes, 0644)
+	if err != nil {
+		return err
+	}
+	return nil
 }

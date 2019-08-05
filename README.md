@@ -83,11 +83,14 @@ Usage:
   bbmri-fhir-gen [directory] [flags]
 
 Flags:
-  -h, --help        help for bbmri-fhir-gen
-  -n, --num int     Number of patients to generate (default 100)
-  -s, --start int   Patient index to start with
-      --version     version for bbmri-fhir-gen
+  -h, --help          help for bbmri-fhir-gen
+  -n, --num int       number of patients to generate (default 100)
+  -s, --start int     patient index to start with
+      --tx-size int   number of patients per transaction (default 100)
+      --version       version for bbmri-fhir-gen
 ```
+
+The generator will generate FHIR transaction bundles in JSON format and put each bundle as file in the directory specified. The defaults will generate one transaction bundle called `transaction-0.json` with 100 patients. If you specify a total number (-n) higher than 100, more than one file will be generated. You can generate additional patients with new identifiers by specifying a custom start value (-s).
 
 ## License
 
