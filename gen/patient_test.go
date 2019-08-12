@@ -25,6 +25,7 @@ func TestPatient(t *testing.T) {
 	assert.Equal(t,
 		"https://fhir.bbmri.de/StructureDefinition/Patient",
 		patient["meta"].(Object)["profile"].(Array)[0])
+	assert.Equal(t, "Patient", patient["resourceType"])
 	assert.Equal(t, "0", patient["id"])
 }
 

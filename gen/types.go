@@ -45,3 +45,19 @@ func quantity(value float64, unit string) Object {
 func reference(resourceType string, id int) Object {
 	return Object{"reference": fmt.Sprintf("%s/%d", resourceType, id)}
 }
+
+func stringReference(resourceType string, id string) Object {
+	return Object{"reference": fmt.Sprintf("%s/%s", resourceType, id)}
+}
+
+func extension(url string, valueType string, value Object) Object {
+	return Object{"url": url, fmt.Sprintf("value%s", valueType): value}
+}
+
+func extensionCodeableConcept(url string, value Object) Object {
+	return extension(url, "CodeableConcept", value)
+}
+
+func extensionReference(url string, value Object) Object {
+	return extension(url, "Reference", value)
+}
