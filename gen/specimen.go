@@ -37,9 +37,7 @@ func storageTemp(r *rand.Rand) Object {
 		"https://fhir.bbmri.de/CodeSystem/StorageTemperature",
 		randStorageTemp(r))
 
-	return extensionCodeableConcept(
-		"https://fhir.bbmri.de/StructureDefinition/StorageTemperature",
-		codeableConcept(coding))
+	return bbmriExtensionCodeableConcept("StorageTemperature", codeableConcept(coding))
 }
 
 func randStorageTemp(r *rand.Rand) string {
@@ -66,14 +64,12 @@ func randStorageTemp(r *rand.Rand) string {
 func sampleDiagnosis(r *rand.Rand) Object {
 	coding := coding("http://hl7.org/fhir/sid/icd-10", randIcd10Code(r))
 
-	return extensionCodeableConcept(
-		"https://fhir.bbmri.de/StructureDefinition/SampleDiagnosis",
-		codeableConcept(coding))
+	return bbmriExtensionCodeableConcept("SampleDiagnosis", codeableConcept(coding))
 }
 
 func custodian(r *rand.Rand) Object {
-	return extensionReference(
-		"https://fhir.bbmri.de/StructureDefinition/Custodian",
+	return bbmriExtensionReference(
+		"Custodian",
 		stringReference("Organization", fmt.Sprintf("collection-%d", r.Intn(10))))
 }
 

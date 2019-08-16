@@ -90,7 +90,7 @@ Flags:
       --version       version for bbmri-fhir-gen
 ```
 
-The generator will generate FHIR transaction bundles in JSON format and put each bundle as file in the directory specified. The defaults will generate one transaction bundle called `transaction-0.json` with 100 patients. If you specify a total number (-n) higher than 100, more than one file will be generated. You can generate additional patients with new identifiers by specifying a custom start value (-s).
+The generator will generate FHIR transaction bundles in JSON format and put each bundle as file in the directory specified. The defaults will generate one transaction bundle called `biobank.json` with biobank and collection resources and one transaction bundle called `transaction-0.json` with 100 patients. If you specify a total number (-n) higher than 100, more than one file will be generated. You can generate additional patients with new identifiers by specifying a custom start value (-s).
 
 ## License
 

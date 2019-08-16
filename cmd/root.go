@@ -46,6 +46,12 @@ FHIR® Patient, Observation and Specimen resources are generated.`,
 
 		r := rand.New(rand.NewSource(0))
 
+		err := genBiobankTxFile(dir)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
 		for i := 0; i < n/txSize; i++ {
 			err := genTxFile(dir, r, start+i*txSize, txSize)
 			if err != nil {
@@ -88,15 +94,23 @@ func checkDir(dir string) error {
 	}
 }
 
+func genBiobankTxFile(dir string) error {
+	return encodeToFile(dir, "biobank.json", gen.BiobankBundle())
+}
+
 func genTxFile(dir string, r *rand.Rand, start, n int) error {
-	filename := fmt.Sprintf("transaction-%d.json", start)
+	return encodeToFile(dir, fmt.Sprintf("transaction-%d.json", start), gen.Bundle(r, start, n))
+}
+
+// encodeToFile encodes the JSON object `o` to the file with `filename` in `dir`
+func encodeToFile(dir string, filename string, o gen.Object) error {
 	f, err := os.OpenFile(filepath.Join(dir, filename), os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
 		return err
 	}
 	e := json.NewEncoder(f)
 	e.SetIndent("", "  ")
-	err = e.Encode(gen.Bundle(r, start, n))
+	err = e.Encode(o)
 	if err1 := f.Close(); err == nil {
 		err = err1
 	}
