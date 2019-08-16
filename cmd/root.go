@@ -47,16 +47,15 @@ FHIR® Patient, Observation and Specimen resources are generated.`,
 
 		r := rand.New(rand.NewSource(0))
 
-		if n < txSize {
-			err := genTxFile(dir, r, start, n)
+		for i := 0; i < n/txSize; i++ {
+			err := genTxFile(dir, r, start+i*txSize, txSize)
 			if err != nil {
 				fmt.Println(err)
 				os.Exit(1)
 			}
 		}
-
-		for i := start; i < n; i += txSize {
-			err := genTxFile(dir, r, i, txSize)
+		if 0 < n%txSize {
+			err := genTxFile(dir, r, start+(n/txSize)*txSize, n%txSize)
 			if err != nil {
 				fmt.Println(err)
 				os.Exit(1)
