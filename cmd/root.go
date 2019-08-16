@@ -20,7 +20,6 @@ import (
 	"fmt"
 	"github.com/samply/bbmri-fhir-gen/gen"
 	"github.com/spf13/cobra"
-	"io/ioutil"
 	"math/rand"
 	"os"
 	"path/filepath"
@@ -90,15 +89,16 @@ func checkDir(dir string) error {
 }
 
 func genTxFile(dir string, r *rand.Rand, start, n int) error {
-	bytes, err := json.MarshalIndent(gen.Bundle(r, start, n), "", "  ")
-	if err != nil {
-		return err
-	}
-
 	filename := fmt.Sprintf("transaction-%d.json", start)
-	err = ioutil.WriteFile(filepath.Join(dir, filename), bytes, 0644)
+	f, err := os.OpenFile(filepath.Join(dir, filename), os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
 		return err
 	}
-	return nil
+	e := json.NewEncoder(f)
+	e.SetIndent("", "  ")
+	err = e.Encode(gen.Bundle(r, start, n))
+	if err1 := f.Close(); err == nil {
+		err = err1
+	}
+	return err
 }

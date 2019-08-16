@@ -17,20 +17,16 @@ package gen
 import (
 	"fmt"
 	"math/rand"
-	"time"
 )
 
-func Condition(r *rand.Rand, patientIdx int, date time.Time) Object {
+func CauseOfDeath(r *rand.Rand, patientIdx int) Object {
 	return Object{
-		"resourceType":  "Condition",
-		"id":            fmt.Sprintf("%d-condition", patientIdx),
-		"meta":          meta("https://fhir.bbmri.de/StructureDefinition/Condition"),
-		"subject":       reference("Patient", patientIdx),
-		"code":          codeableConcept(codingWithVersion("http://hl7.org/fhir/sid/icd-10", "2016", randIcd10Code(r))),
-		"onsetDateTime": date.Format("2006-01-02"),
+		"resourceType":         "Observation",
+		"id":                   fmt.Sprintf("%d-cause-of-death", patientIdx),
+		"meta":                 meta("https://fhir.bbmri.de/StructureDefinition/CauseOfDeath"),
+		"status":               "final",
+		"code":                 codeableConcept(coding("http://loinc.org", "68343-3")),
+		"subject":              reference("Patient", patientIdx),
+		"valueCodeableConcept": codeableConcept(coding("http://hl7.org/fhir/sid/icd-10", randIcd10Code(r))),
 	}
-}
-
-func randIcd10Code(r *rand.Rand) string {
-	return fmt.Sprintf("%s%02d.%d", string(65+r.Intn(26)), r.Intn(100), r.Intn(10))
 }
