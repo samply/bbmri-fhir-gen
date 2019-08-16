@@ -30,6 +30,10 @@ func coding(system string, code string) Object {
 	return Object{"system": system, "code": code}
 }
 
+func bbmriCoding(name string, code string) Object {
+	return Object{"system": "https://fhir.bbmri.de/CodeSystem/" + name, "code": code}
+}
+
 func codingWithVersion(system string, version string, code string) Object {
 	return Object{"system": system, "version": version, "code": code}
 }
@@ -50,14 +54,22 @@ func stringReference(resourceType string, id string) Object {
 	return Object{"reference": fmt.Sprintf("%s/%s", resourceType, id)}
 }
 
-func extension(url string, valueType string, value Object) Object {
+func extension(url string, valueType string, value interface{}) Object {
 	return Object{"url": url, fmt.Sprintf("value%s", valueType): value}
 }
 
-func extensionCodeableConcept(url string, value Object) Object {
-	return extension(url, "CodeableConcept", value)
+func bbmriExtension(name string, valueType string, value interface{}) Object {
+	return extension("https://fhir.bbmri.de/StructureDefinition/"+name, valueType, value)
 }
 
-func extensionReference(url string, value Object) Object {
-	return extension(url, "Reference", value)
+func bbmriExtensionCodeableConcept(name string, value Object) Object {
+	return bbmriExtension(name, "CodeableConcept", value)
+}
+
+func bbmriExtensionReference(name string, value Object) Object {
+	return bbmriExtension(name, "Reference", value)
+}
+
+func bbmriExtensionString(name string, value string) Object {
+	return bbmriExtension(name, "String", value)
 }

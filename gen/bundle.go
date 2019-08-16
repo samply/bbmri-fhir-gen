@@ -21,13 +21,26 @@ import (
 	"math/rand"
 )
 
+func BiobankBundle() Object {
+	entries := make(Array, 0, 11)
+	entries = append(entries, entry(Biobank()))
+	for i := 0; i < 10; i++ {
+		entries = append(entries, entry(Collection(i)))
+	}
+	return Object{
+		"resourceType": "Bundle",
+		"id":           uuid.New().String(),
+		"type":         "transaction",
+		"entry":        entries,
+	}
+}
+
 func Bundle(r *rand.Rand, start int, n int) Object {
 	entries := make(Array, 0, n)
 	for i := start; i < start+n; i++ {
 
 		patient := Patient(r, i)
 		entries = append(entries, entry(patient))
-
 
 		encounterDate := randDate(r, 2000, 2018)
 		bmi := RandBmiValue(r)
@@ -37,11 +50,11 @@ func Bundle(r *rand.Rand, start int, n int) Object {
 		entries = append(entries, entry(BodyHeight(i, encounterDate, bodyHeight)))
 		entries = append(entries, entry(BodyWeight(i, encounterDate, bodyWeight)))
 		entries = append(entries, entry(Condition(r, i, encounterDate)))
-		entries = append(entries, entry(TobaccoUse(r,i,encounterDate)))
-		entries = append(entries, entry(Specimen(r,i,encounterDate)))
+		entries = append(entries, entry(TobaccoUse(r, i, encounterDate)))
+		entries = append(entries, entry(Specimen(r, i, encounterDate)))
 
 		if patient["deceasedDateTime"] != nil {
-			entries = append(entries, entry(CauseOfDeath(r,i)))
+			entries = append(entries, entry(CauseOfDeath(r, i)))
 		}
 
 	}
