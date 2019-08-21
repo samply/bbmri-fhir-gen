@@ -76,7 +76,7 @@ func custodian(r *rand.Rand) Object {
 func collection(r *rand.Rand, date time.Time) Object {
 	return Object{
 		"collectedDateTime":            date.Format("2006-01-02"),
-		"bodySite":                     codeableConcept(coding("https://www.who.int/classifications/icd/adaptations/oncology/en/", randIcdOCode(r))),
+		"bodySite":                     codeableConcept(coding("urn:oid:2.16.840.1.113883.6.43.1", randIcdOCode(r))),
 		"fastingStatusCodeableConcept": codeableConcept(coding("http://terminology.hl7.org/CodeSystem/v2-0916", randFastingStatus(r))),
 	}
 }

@@ -45,7 +45,7 @@ func TestSpecimen(t *testing.T) {
 	assert.Equal(t, "Patient/0", specimen["subject"].(Object)["reference"])
 
 	assert.Equal(t, "2019-07-30", specimen["collection"].(Object)["collectedDateTime"])
-	assert.Equal(t, "https://www.who.int/classifications/icd/adaptations/oncology/en/", specimen["collection"].(Object)["bodySite"].(Object)["coding"].(Array)[0].(Object)["system"])
+	assert.Equal(t, "urn:oid:2.16.840.1.113883.6.43.1", specimen["collection"].(Object)["bodySite"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "C18.5", specimen["collection"].(Object)["bodySite"].(Object)["coding"].(Array)[0].(Object)["code"])
 	assert.Equal(t, "http://terminology.hl7.org/CodeSystem/v2-0916", specimen["collection"].(Object)["fastingStatusCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "NF", specimen["collection"].(Object)["fastingStatusCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])
