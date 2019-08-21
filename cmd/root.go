@@ -33,7 +33,7 @@ var rootCmd = &cobra.Command{
 	Short: "BBMRI FHIR Test Data Generator",
 	Long: `Generates FHIR® Bundles with test data. Currently a fix set of 
 FHIR® Patient, Observation and Specimen resources are generated.`,
-	Version:   "0.1.0",
+	Version:   "0.2.0",
 	ValidArgs: []string{"directory"},
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) < 1 {

@@ -14,13 +14,13 @@ bbmri-fhir-gen is written in Go. All you need is a single binary which is availa
 1. Download the latest release with the command:
 
    ```bash
-   curl -LO https://github.com/samply/bbmri-fhir-gen/releases/download/v0.2.0/bbmri-fhir-gen-0.1.0-linux-amd64.tar.gz
+   curl -LO https://github.com/samply/bbmri-fhir-gen/releases/download/v0.2.0/bbmri-fhir-gen-0.2.0-linux-amd64.tar.gz
    ```
 
 1. Untar the binary:
 
    ```bash
-   tar xzf bbmri-fhir-gen-0.1.0-linux-amd64.tar.gz
+   tar xzf bbmri-fhir-gen-0.2.0-linux-amd64.tar.gz
    ```
    
 1. Move the binary in to your PATH.
@@ -40,13 +40,13 @@ bbmri-fhir-gen is written in Go. All you need is a single binary which is availa
 1. Download the latest release with the command:
 
    ```bash
-   curl -LO https://github.com/samply/bbmri-fhir-gen/releases/download/v0.2.0/bbmri-fhir-gen-0.1.0-darwin-amd64.tar.gz
+   curl -LO https://github.com/samply/bbmri-fhir-gen/releases/download/v0.2.0/bbmri-fhir-gen-0.2.0-darwin-amd64.tar.gz
    ```
 
 1. Untar the binary:
 
    ```bash
-   tar xzf bbmri-fhir-gen-0.1.0-darwin-amd64.tar.gz
+   tar xzf bbmri-fhir-gen-0.2.0-darwin-amd64.tar.gz
    ```
    
 1. Move the binary in to your PATH.
@@ -103,4 +103,4 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 [1]: <https://github.com/samply/bbmri-fhir-ig>
-[2]: <https://github.com/samply/bbmri-fhir-gen/releases/download/v0.1.0/bbmri-fhir-gen-0.1.0-windows-amd64.zip>
+[2]: <https://github.com/samply/bbmri-fhir-gen/releases/download/v0.2.0/bbmri-fhir-gen-0.2.0-windows-amd64.zip>
