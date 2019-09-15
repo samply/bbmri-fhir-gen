@@ -20,10 +20,10 @@ import (
 	"time"
 )
 
-func Specimen(r *rand.Rand, patientIdx int, date time.Time) Object {
+func Specimen(r *rand.Rand, patientIdx int, specimenIdx int, date time.Time) Object {
 	return Object{
 		"resourceType": "Specimen",
-		"id":           fmt.Sprintf("%d-specimen", patientIdx),
+		"id":           fmt.Sprintf("%d-specimen-%d", patientIdx, specimenIdx),
 		"meta":         meta("https://fhir.bbmri.de/StructureDefinition/Specimen"),
 		"extension":    Array{storageTemp(r), sampleDiagnosis(r), custodian(r)},
 		"type":         codeableConcept(coding("https://fhir.bbmri.de/CodeSystem/SampleMaterialType", "whole-blood")),
