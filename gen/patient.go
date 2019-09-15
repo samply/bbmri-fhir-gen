@@ -38,15 +38,10 @@ func Patient(r *rand.Rand, idx int) Object {
 	return patient
 }
 
+var genders = []string{"male", "female"}
+
 func randGender(r *rand.Rand) string {
-	switch r.Intn(2) {
-	case 0:
-		return "male"
-	case 1:
-		return "female"
-	default:
-		panic("too many switch cases")
-	}
+	return genders[r.Intn(len(genders))]
 }
 
 func randDate(r *rand.Rand, startYear int, endYear int) time.Time {

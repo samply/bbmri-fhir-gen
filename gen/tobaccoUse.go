@@ -34,25 +34,17 @@ func TobaccoUse(r *rand.Rand, patientIdx int, time time.Time) Object {
 	return tobaccoUse
 }
 
+var smokingStatus = []string{
+	"LA18976-3",
+	"LA18977-1",
+	"LA15920-4",
+	"LA18978-9",
+	"LA18979-7",
+	"LA18980-5",
+	"LA18981-3",
+	"LA18982-1",
+}
+
 func randSmokingStatus(r *rand.Rand) string {
-	switch r.Intn(7) {
-	case 0:
-		return "LA18976-3"
-	case 1:
-		return "LA18977-1"
-	case 2:
-		return "LA15920-4"
-	case 3:
-		return "LA18978-9"
-	case 4:
-		return "LA18979-7"
-	case 5:
-		return "LA18980-5"
-	case 6:
-		return "LA18981-3"
-	case 7:
-		return "LA18982-1"
-	default:
-		panic("too many switch cases")
-	}
+	return smokingStatus[r.Intn(len(smokingStatus))]
 }

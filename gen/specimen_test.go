@@ -35,7 +35,7 @@ func TestSpecimen(t *testing.T) {
 	assert.Equal(t, "0-specimen-0", specimen["id"])
 	assert.Equal(t, "https://fhir.bbmri.de/StructureDefinition/StorageTemperature", specimen["extension"].(Array)[0].(Object)["url"])
 	assert.Equal(t, "https://fhir.bbmri.de/CodeSystem/StorageTemperature", specimen["extension"].(Array)[0].(Object)["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["system"])
-	assert.Equal(t, "temperatureRoom", specimen["extension"].(Array)[0].(Object)["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])
+	assert.Equal(t, "temperatureOther", specimen["extension"].(Array)[0].(Object)["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])
 	assert.Equal(t, "https://fhir.bbmri.de/StructureDefinition/SampleDiagnosis", specimen["extension"].(Array)[1].(Object)["url"])
 	assert.Equal(t, "http://hl7.org/fhir/sid/icd-10", specimen["extension"].(Array)[1].(Object)["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "V47.9", specimen["extension"].(Array)[1].(Object)["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])
@@ -46,7 +46,7 @@ func TestSpecimen(t *testing.T) {
 
 	assert.Equal(t, "2019-07-30", specimen["collection"].(Object)["collectedDateTime"])
 	assert.Equal(t, "urn:oid:2.16.840.1.113883.6.43.1", specimen["collection"].(Object)["bodySite"].(Object)["coding"].(Array)[0].(Object)["system"])
-	assert.Equal(t, "C18.5", specimen["collection"].(Object)["bodySite"].(Object)["coding"].(Array)[0].(Object)["code"])
+	assert.Equal(t, "C25.0", specimen["collection"].(Object)["bodySite"].(Object)["coding"].(Array)[0].(Object)["code"])
 	assert.Equal(t, "http://terminology.hl7.org/CodeSystem/v2-0916", specimen["collection"].(Object)["fastingStatusCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["system"])
-	assert.Equal(t, "NF", specimen["collection"].(Object)["fastingStatusCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])
+	assert.Equal(t, "F", specimen["collection"].(Object)["fastingStatusCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])
 }

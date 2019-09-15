@@ -26,7 +26,7 @@ func Specimen(r *rand.Rand, patientIdx int, specimenIdx int, date time.Time) Obj
 		"id":           fmt.Sprintf("%d-specimen-%d", patientIdx, specimenIdx),
 		"meta":         meta("https://fhir.bbmri.de/StructureDefinition/Specimen"),
 		"extension":    Array{storageTemp(r), sampleDiagnosis(r), custodian(r)},
-		"type":         codeableConcept(coding("https://fhir.bbmri.de/CodeSystem/SampleMaterialType", "whole-blood")),
+		"type":         codeableConcept(materialTypeCoding(r)),
 		"subject":      reference("Patient", patientIdx),
 		"collection":   collection(r, date),
 	}
@@ -40,25 +40,18 @@ func storageTemp(r *rand.Rand) Object {
 	return bbmriExtensionCodeableConcept("StorageTemperature", codeableConcept(coding))
 }
 
+var storageTemps = []string{
+	"temperature2to10",
+	"temperature-18to-35",
+	"temperature-60to-85",
+	"temperatureGN",
+	"temperatureLN",
+	"temperatureRoom",
+	"temperatureOther",
+}
+
 func randStorageTemp(r *rand.Rand) string {
-	switch n := r.Intn(6); n {
-	case 0:
-		return "temperature2to10"
-	case 1:
-		return "temperature-18to-35"
-	case 2:
-		return "temperature-60to-85"
-	case 3:
-		return "temperatureGN"
-	case 4:
-		return "temperatureLN"
-	case 5:
-		return "temperatureRoom"
-	case 6:
-		return "temperatureOther"
-	default:
-		panic("too many switch cases")
-	}
+	return storageTemps[r.Intn(len(storageTemps))]
 }
 
 func sampleDiagnosis(r *rand.Rand) Object {
@@ -81,21 +74,47 @@ func collection(r *rand.Rand, date time.Time) Object {
 	}
 }
 
+var fastingStatus = []string{"F", "FNA", "NF", "NG"}
+
 func randFastingStatus(r *rand.Rand) string {
-	switch n := r.Intn(3); n {
-	case 0:
-		return "F"
-	case 1:
-		return "FNA"
-	case 2:
-		return "NF"
-	case 3:
-		return "NG"
-	default:
-		panic("too many switch cases")
-	}
+	return fastingStatus[r.Intn(len(fastingStatus))]
 }
 
 func randIcdOCode(r *rand.Rand) string {
 	return fmt.Sprintf("C%02d.%d", r.Intn(100), r.Intn(10))
+}
+
+func materialTypeCoding(r *rand.Rand) Object {
+	return coding("https://fhir.bbmri.de/CodeSystem/SampleMaterialType",
+		randMaterialType(r))
+}
+
+var materialTypes = []string{
+	"tissue",
+	"tissue-formalin",
+	"tissue-frozen",
+	"tissue-paxgene-or-else",
+	"tissue-other",
+	"liquid",
+	"whole-blood",
+	"blood-plasma",
+	"blood-serum",
+	"peripheral-blood-cells-vital",
+	"buffy-coat",
+	"bone-marrow",
+	"csf-liquor",
+	"ascites",
+	"urine",
+	"saliva",
+	"stool-faeces",
+	"liquid-other",
+	"derivative",
+	"dna",
+	"cf-dna",
+	"rna",
+	"derivative-other",
+}
+
+func randMaterialType(r *rand.Rand) string {
+	return materialTypes[r.Intn(len(materialTypes))]
 }
