@@ -27,12 +27,12 @@ func TestSpecimen(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	specimen := Specimen(rand.New(rand.NewSource(1)), 0, date)
+	specimen := Specimen(rand.New(rand.NewSource(1)), 0, 0, date)
 	assert.Equal(t,
 		"https://fhir.bbmri.de/StructureDefinition/Specimen",
 		specimen["meta"].(Object)["profile"].(Array)[0])
 	assert.Equal(t, "Specimen", specimen["resourceType"])
-	assert.Equal(t, "0-specimen", specimen["id"])
+	assert.Equal(t, "0-specimen-0", specimen["id"])
 	assert.Equal(t, "https://fhir.bbmri.de/StructureDefinition/StorageTemperature", specimen["extension"].(Array)[0].(Object)["url"])
 	assert.Equal(t, "https://fhir.bbmri.de/CodeSystem/StorageTemperature", specimen["extension"].(Array)[0].(Object)["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "temperatureRoom", specimen["extension"].(Array)[0].(Object)["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])

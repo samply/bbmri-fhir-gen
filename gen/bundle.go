@@ -19,6 +19,7 @@ import (
 	"github.com/google/uuid"
 	"math"
 	"math/rand"
+	"time"
 )
 
 func BiobankBundle() Object {
@@ -51,7 +52,7 @@ func Bundle(r *rand.Rand, start int, n int) Object {
 		entries = append(entries, entry(BodyWeight(i, encounterDate, bodyWeight)))
 		entries = append(entries, entry(Condition(r, i, encounterDate)))
 		entries = append(entries, entry(TobaccoUse(r, i, encounterDate)))
-		entries = append(entries, entry(Specimen(r, i, encounterDate)))
+		entries = appendSpecimens(entries, r, i, encounterDate)
 
 		if patient["deceasedDateTime"] != nil {
 			entries = append(entries, entry(CauseOfDeath(r, i)))
@@ -64,6 +65,13 @@ func Bundle(r *rand.Rand, start int, n int) Object {
 		"type":         "transaction",
 		"entry":        entries,
 	}
+}
+
+func appendSpecimens(entries Array, r *rand.Rand, patientIdx int, encounterDate time.Time) Array {
+	for i := 0; i < int(r.NormFloat64()*3+10); i++ {
+		entries = append(entries, entry(Specimen(r, patientIdx, i, encounterDate)))
+	}
+	return entries
 }
 
 func entry(resource Object) Object {
