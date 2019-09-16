@@ -36,6 +36,6 @@ func TestTobaccoUse(t *testing.T) {
 	assert.Equal(t, "http://loinc.org", tobaccoUse["code"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "72166-2", tobaccoUse["code"].(Object)["coding"].(Array)[0].(Object)["code"])
 	assert.Equal(t, "http://loinc.org", tobaccoUse["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["system"])
-	assert.Equal(t, "LA18981-3", tobaccoUse["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])
+	assert.Equal(t, "LA18977-1", tobaccoUse["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])
 	assert.Equal(t, "Patient/0", tobaccoUse["subject"].(Object)["reference"])
 }
