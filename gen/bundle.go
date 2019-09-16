@@ -50,7 +50,7 @@ func Bundle(r *rand.Rand, start int, n int) Object {
 		entries = append(entries, entry(Bmi(i, encounterDate, bmi)))
 		entries = append(entries, entry(BodyHeight(i, encounterDate, bodyHeight)))
 		entries = append(entries, entry(BodyWeight(i, encounterDate, bodyWeight)))
-		entries = append(entries, entry(Condition(r, i, encounterDate)))
+		entries = appendConditions(entries, r, i, encounterDate)
 		entries = append(entries, entry(TobaccoUse(r, i, encounterDate)))
 		entries = appendSpecimens(entries, r, i, encounterDate)
 
@@ -65,6 +65,13 @@ func Bundle(r *rand.Rand, start int, n int) Object {
 		"type":         "transaction",
 		"entry":        entries,
 	}
+}
+
+func appendConditions(entries Array, r *rand.Rand, patientIdx int, encounterDate time.Time) Array {
+	for i := 0; i < int(r.NormFloat64()*1.5+5); i++ {
+		entries = append(entries, entry(Condition(r, patientIdx, i, encounterDate)))
+	}
+	return entries
 }
 
 func appendSpecimens(entries Array, r *rand.Rand, patientIdx int, encounterDate time.Time) Array {
