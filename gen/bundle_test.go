@@ -22,5 +22,5 @@ import (
 
 func TestBundle(t *testing.T) {
 	bundle := Bundle(rand.New(rand.NewSource(0)), 0, 1)
-	assert.Equal(t, 17, len(bundle["entry"].(Array)))
+	assert.Equal(t, 25, len(bundle["entry"].(Array)))
 }

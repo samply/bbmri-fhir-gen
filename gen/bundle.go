@@ -57,8 +57,8 @@ func Bundle(r *rand.Rand, start int, n int) Object {
 		if patient["deceasedDateTime"] != nil {
 			entries = append(entries, entry(CauseOfDeath(r, i)))
 		}
-
 	}
+
 	return Object{
 		"resourceType": "Bundle",
 		"id":           uuid.New().String(),
@@ -68,14 +68,16 @@ func Bundle(r *rand.Rand, start int, n int) Object {
 }
 
 func appendConditions(entries Array, r *rand.Rand, patientIdx int, encounterDate time.Time) Array {
-	for i := 0; i < int(r.NormFloat64()*1.5+5); i++ {
+	n := int(math.Round(r.NormFloat64()*1.5 + 5))
+	for i := 0; i < n; i++ {
 		entries = append(entries, entry(Condition(r, patientIdx, i, encounterDate)))
 	}
 	return entries
 }
 
 func appendSpecimens(entries Array, r *rand.Rand, patientIdx int, encounterDate time.Time) Array {
-	for i := 0; i < int(r.NormFloat64()*3+10); i++ {
+	n := int(math.Round(r.NormFloat64()*3 + 10))
+	for i := 0; i < n; i++ {
 		entries = append(entries, entry(Specimen(r, patientIdx, i, encounterDate)))
 	}
 	return entries
