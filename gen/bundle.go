@@ -85,7 +85,6 @@ func appendSpecimens(entries Array, r *rand.Rand, patientIdx int, encounterDate 
 
 func entry(resource Object) Object {
 	return Object{
-		"fullUrl":  uuid.New().String(),
 		"resource": resource,
 		"request": Object{
 			"method": "PUT",
