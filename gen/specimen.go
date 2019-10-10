@@ -23,11 +23,11 @@ import (
 func Specimen(r *rand.Rand, patientIdx int, specimenIdx int, date time.Time) Object {
 	return Object{
 		"resourceType": "Specimen",
-		"id":           fmt.Sprintf("%d-specimen-%d", patientIdx, specimenIdx),
+		"id":           fmt.Sprintf("bbmri-%d-specimen-%d", patientIdx, specimenIdx),
 		"meta":         meta("https://fhir.bbmri.de/StructureDefinition/Specimen"),
 		"extension":    Array{storageTemp(r), sampleDiagnosis(r), custodian(r)},
 		"type":         codeableConcept(materialTypeCoding(r)),
-		"subject":      reference("Patient", patientIdx),
+		"subject":      patientReference(patientIdx),
 		"collection":   collection(r, date),
 	}
 }

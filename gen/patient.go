@@ -23,7 +23,7 @@ import (
 func Patient(r *rand.Rand, idx int) Object {
 	patient := make(map[string]interface{})
 	patient["resourceType"] = "Patient"
-	patient["id"] = fmt.Sprint(idx)
+	patient["id"] = fmt.Sprintf("bbmri-%d", idx)
 	patient["meta"] = meta("https://fhir.bbmri.de/StructureDefinition/Patient")
 	patient["gender"] = randGender(r)
 

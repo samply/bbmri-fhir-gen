@@ -32,10 +32,10 @@ func TestCondition(t *testing.T) {
 		"https://fhir.bbmri.de/StructureDefinition/Condition",
 		condition["meta"].(Object)["profile"].(Array)[0])
 	assert.Equal(t, "Condition", condition["resourceType"])
-	assert.Equal(t, "0-condition-0", condition["id"])
+	assert.Equal(t, "bbmri-0-condition-0", condition["id"])
 	assert.Equal(t, "2019-07-30", condition["onsetDateTime"])
 	assert.Equal(t, "http://hl7.org/fhir/sid/icd-10", condition["code"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "2016", condition["code"].(Object)["coding"].(Array)[0].(Object)["version"])
 	assert.Equal(t, "Q36.9", condition["code"].(Object)["coding"].(Array)[0].(Object)["code"])
-	assert.Equal(t, "Patient/0", condition["subject"].(Object)["reference"])
+	assert.Equal(t, "Patient/bbmri-0", condition["subject"].(Object)["reference"])
 }

@@ -22,11 +22,11 @@ import (
 func CauseOfDeath(r *rand.Rand, patientIdx int) Object {
 	return Object{
 		"resourceType":         "Observation",
-		"id":                   fmt.Sprintf("%d-cause-of-death", patientIdx),
+		"id":                   fmt.Sprintf("bbmri-%d-cause-of-death", patientIdx),
 		"meta":                 meta("https://fhir.bbmri.de/StructureDefinition/CauseOfDeath"),
 		"status":               "final",
 		"code":                 codeableConcept(coding("http://loinc.org", "68343-3")),
-		"subject":              reference("Patient", patientIdx),
+		"subject":              patientReference(patientIdx),
 		"valueCodeableConcept": codeableConcept(coding("http://hl7.org/fhir/sid/icd-10", randIcd10Code(r))),
 	}
 }

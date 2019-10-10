@@ -32,7 +32,7 @@ func TestSpecimen(t *testing.T) {
 		"https://fhir.bbmri.de/StructureDefinition/Specimen",
 		specimen["meta"].(Object)["profile"].(Array)[0])
 	assert.Equal(t, "Specimen", specimen["resourceType"])
-	assert.Equal(t, "0-specimen-0", specimen["id"])
+	assert.Equal(t, "bbmri-0-specimen-0", specimen["id"])
 	assert.Equal(t, "https://fhir.bbmri.de/StructureDefinition/StorageTemperature", specimen["extension"].(Array)[0].(Object)["url"])
 	assert.Equal(t, "https://fhir.bbmri.de/CodeSystem/StorageTemperature", specimen["extension"].(Array)[0].(Object)["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "temperatureOther", specimen["extension"].(Array)[0].(Object)["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])
@@ -42,7 +42,7 @@ func TestSpecimen(t *testing.T) {
 	assert.Equal(t, "https://fhir.bbmri.de/StructureDefinition/Custodian", specimen["extension"].(Array)[2].(Object)["url"])
 	assert.Equal(t, "Organization/collection-1", specimen["extension"].(Array)[2].(Object)["valueReference"].(Object)["reference"])
 
-	assert.Equal(t, "Patient/0", specimen["subject"].(Object)["reference"])
+	assert.Equal(t, "Patient/bbmri-0", specimen["subject"].(Object)["reference"])
 
 	assert.Equal(t, "2019-07-30", specimen["collection"].(Object)["collectedDateTime"])
 	assert.Equal(t, "urn:oid:2.16.840.1.113883.6.43.1", specimen["collection"].(Object)["bodySite"].(Object)["coding"].(Array)[0].(Object)["system"])

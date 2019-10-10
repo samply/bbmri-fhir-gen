@@ -31,7 +31,7 @@ func TestBodyHeight(t *testing.T) {
 		"https://fhir.bbmri.de/StructureDefinition/BodyHeight",
 		height["meta"].(Object)["profile"].(Array)[0])
 	assert.Equal(t, "Observation", height["resourceType"])
-	assert.Equal(t, "0-body-height", height["id"])
+	assert.Equal(t, "bbmri-0-body-height", height["id"])
 	assert.Equal(t, "http://loinc.org", height["code"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "8302-2", height["code"].(Object)["coding"].(Array)[0].(Object)["code"])
 	assert.Equal(t, "2019-07-30", height["effectiveDateTime"])
@@ -39,5 +39,5 @@ func TestBodyHeight(t *testing.T) {
 	assert.Equal(t, "cm", height["valueQuantity"].(Object)["unit"])
 	assert.Equal(t, "cm", height["valueQuantity"].(Object)["code"])
 	assert.Equal(t, "http://unitsofmeasure.org", height["valueQuantity"].(Object)["system"])
-	assert.Equal(t, "Patient/0", height["subject"].(Object)["reference"])
+	assert.Equal(t, "Patient/bbmri-0", height["subject"].(Object)["reference"])
 }
