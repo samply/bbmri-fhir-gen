@@ -27,10 +27,10 @@ func TestCauseOfDeath(t *testing.T) {
 		"https://fhir.bbmri.de/StructureDefinition/CauseOfDeath",
 		causeOfDeath["meta"].(Object)["profile"].(Array)[0])
 	assert.Equal(t, "Observation", causeOfDeath["resourceType"])
-	assert.Equal(t, "0-cause-of-death", causeOfDeath["id"])
+	assert.Equal(t, "bbmri-0-cause-of-death", causeOfDeath["id"])
 	assert.Equal(t, "http://loinc.org", causeOfDeath["code"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "68343-3", causeOfDeath["code"].(Object)["coding"].(Array)[0].(Object)["code"])
 	assert.Equal(t, "http://hl7.org/fhir/sid/icd-10", causeOfDeath["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["system"])
-	assert.Equal(t, "Patient/0", causeOfDeath["subject"].(Object)["reference"])
+	assert.Equal(t, "Patient/bbmri-0", causeOfDeath["subject"].(Object)["reference"])
 
 }

@@ -32,10 +32,10 @@ func TestTobaccoUse(t *testing.T) {
 		"https://fhir.bbmri.de/StructureDefinition/TobaccoUse",
 		tobaccoUse["meta"].(Object)["profile"].(Array)[0])
 	assert.Equal(t, "Observation", tobaccoUse["resourceType"])
-	assert.Equal(t, "0-tobacco-use", tobaccoUse["id"])
+	assert.Equal(t, "bbmri-0-tobacco-use", tobaccoUse["id"])
 	assert.Equal(t, "http://loinc.org", tobaccoUse["code"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "72166-2", tobaccoUse["code"].(Object)["coding"].(Array)[0].(Object)["code"])
 	assert.Equal(t, "http://loinc.org", tobaccoUse["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "LA18977-1", tobaccoUse["valueCodeableConcept"].(Object)["coding"].(Array)[0].(Object)["code"])
-	assert.Equal(t, "Patient/0", tobaccoUse["subject"].(Object)["reference"])
+	assert.Equal(t, "Patient/bbmri-0", tobaccoUse["subject"].(Object)["reference"])
 }

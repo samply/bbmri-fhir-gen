@@ -27,7 +27,7 @@ func Bmi(patientIdx int, date time.Time, value float64) Object {
 		"meta":              meta("https://fhir.bbmri.de/StructureDefinition/Bmi"),
 		"status":            "final",
 		"category":          Array{vitalSigns},
-		"subject":           reference("Patient", patientIdx),
+		"subject":           patientReference(patientIdx),
 		"code":              codeableConcept(coding("http://loinc.org", "39156-5")),
 		"effectiveDateTime": date.Format("2006-01-02"),
 		"valueQuantity":     quantity(value, "kg/m2"),

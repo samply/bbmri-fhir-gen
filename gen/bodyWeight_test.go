@@ -31,7 +31,7 @@ func TestBodyWeight(t *testing.T) {
 		"https://fhir.bbmri.de/StructureDefinition/BodyWeight",
 		weight["meta"].(Object)["profile"].(Array)[0])
 	assert.Equal(t, "Observation", weight["resourceType"])
-	assert.Equal(t, "0-body-weight", weight["id"])
+	assert.Equal(t, "bbmri-0-body-weight", weight["id"])
 	assert.Equal(t, "http://loinc.org", weight["code"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "29463-7", weight["code"].(Object)["coding"].(Array)[0].(Object)["code"])
 	assert.Equal(t, "2019-07-30", weight["effectiveDateTime"])
@@ -39,5 +39,5 @@ func TestBodyWeight(t *testing.T) {
 	assert.Equal(t, "kg", weight["valueQuantity"].(Object)["unit"])
 	assert.Equal(t, "kg", weight["valueQuantity"].(Object)["code"])
 	assert.Equal(t, "http://unitsofmeasure.org", weight["valueQuantity"].(Object)["system"])
-	assert.Equal(t, "Patient/0", weight["subject"].(Object)["reference"])
+	assert.Equal(t, "Patient/bbmri-0", weight["subject"].(Object)["reference"])
 }

@@ -23,11 +23,11 @@ import (
 func TobaccoUse(r *rand.Rand, patientIdx int, time time.Time) Object {
 	tobaccoUse := make(map[string]interface{})
 	tobaccoUse["resourceType"] = "Observation"
-	tobaccoUse["id"] = fmt.Sprintf("%d-tobacco-use", patientIdx)
+	tobaccoUse["id"] = fmt.Sprintf("bbmri-%d-tobacco-use", patientIdx)
 	tobaccoUse["meta"] = meta("https://fhir.bbmri.de/StructureDefinition/TobaccoUse")
 	tobaccoUse["status"] = "final"
 	tobaccoUse["code"] = codeableConcept(coding("http://loinc.org", "72166-2"))
-	tobaccoUse["subject"] = reference("Patient", patientIdx)
+	tobaccoUse["subject"] = patientReference(patientIdx)
 	tobaccoUse["effectiveDateTime"] = time.Format("2006-01-02")
 	tobaccoUse["valueCodeableConcept"] = codeableConcept(coding("http://loinc.org", randSmokingStatus(r)))
 

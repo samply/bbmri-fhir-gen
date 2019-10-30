@@ -46,8 +46,8 @@ func quantity(value float64, unit string) Object {
 	return Object{"value": value, "unit": unit, "system": "http://unitsofmeasure.org", "code": unit}
 }
 
-func reference(resourceType string, id int) Object {
-	return Object{"reference": fmt.Sprintf("%s/%d", resourceType, id)}
+func patientReference(idx int) Object {
+	return Object{"reference": fmt.Sprintf("Patient/bbmri-%d", idx)}
 }
 
 func stringReference(resourceType string, id string) Object {

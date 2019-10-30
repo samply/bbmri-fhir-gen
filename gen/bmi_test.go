@@ -39,5 +39,5 @@ func TestBmi(t *testing.T) {
 	assert.Equal(t, "kg/m2", bmi["valueQuantity"].(Object)["unit"])
 	assert.Equal(t, "kg/m2", bmi["valueQuantity"].(Object)["code"])
 	assert.Equal(t, "http://unitsofmeasure.org", bmi["valueQuantity"].(Object)["system"])
-	assert.Equal(t, "Patient/0", bmi["subject"].(Object)["reference"])
+	assert.Equal(t, "Patient/bbmri-0", bmi["subject"].(Object)["reference"])
 }
