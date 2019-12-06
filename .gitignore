@@ -1,3 +1,4 @@
 /builds/
 /test/
 /bbmri-fhir-gen
+*.exe

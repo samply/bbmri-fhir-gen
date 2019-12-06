@@ -85,6 +85,7 @@ func appendSpecimens(entries Array, r *rand.Rand, patientIdx int, encounterDate 
 
 func entry(resource Object) Object {
 	return Object{
+		"fullUrl":  fmt.Sprintf("http://example.com/%s/%s", resource["resourceType"], resource["id"]),
 		"resource": resource,
 		"request": Object{
 			"method": "PUT",

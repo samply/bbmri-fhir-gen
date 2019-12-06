@@ -24,3 +24,8 @@ func TestBundle(t *testing.T) {
 	bundle := Bundle(rand.New(rand.NewSource(0)), 0, 1)
 	assert.Equal(t, 25, len(bundle["entry"].(Array)))
 }
+
+func TestEntry(t *testing.T) {
+	entry := entry(Biobank())
+	assert.Equal(t, "http://example.com/Organization/biobank-0", entry["fullUrl"].(string))
+}
