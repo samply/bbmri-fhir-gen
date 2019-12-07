@@ -16,6 +16,7 @@ package gen
 
 import (
 	"fmt"
+	"math"
 	"math/rand"
 	"time"
 )
@@ -30,7 +31,7 @@ func BodyHeight(patientIdx int, date time.Time, value float64) Object {
 		"subject":           patientReference(patientIdx),
 		"code":              codeableConcept(coding("http://loinc.org", "8302-2")),
 		"effectiveDateTime": date.Format("2006-01-02"),
-		"valueQuantity":     quantity(value, "cm"),
+		"valueQuantity":     quantity(math.Round(value), "cm"),
 	}
 }
 

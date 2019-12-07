@@ -16,6 +16,7 @@ package gen
 
 import (
 	"fmt"
+	"math"
 	"time"
 )
 
@@ -29,6 +30,6 @@ func BodyWeight(patientIdx int, date time.Time, value float64) Object {
 		"subject":           patientReference(patientIdx),
 		"code":              codeableConcept(coding("http://loinc.org", "29463-7")),
 		"effectiveDateTime": date.Format("2006-01-02"),
-		"valueQuantity":     quantity(value, "kg"),
+		"valueQuantity":     quantity(math.Round(value), "kg"),
 	}
 }

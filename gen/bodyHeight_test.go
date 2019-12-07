@@ -26,7 +26,7 @@ func TestBodyHeight(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	height := BodyHeight(0, date, 170.0)
+	height := BodyHeight(0, date, 170.1)
 	assert.Equal(t,
 		"https://fhir.bbmri.de/StructureDefinition/BodyHeight",
 		height["meta"].(Object)["profile"].(Array)[0])

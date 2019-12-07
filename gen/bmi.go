@@ -16,6 +16,7 @@ package gen
 
 import (
 	"fmt"
+	"math"
 	"math/rand"
 	"time"
 )
@@ -30,7 +31,7 @@ func Bmi(patientIdx int, date time.Time, value float64) Object {
 		"subject":           patientReference(patientIdx),
 		"code":              codeableConcept(coding("http://loinc.org", "39156-5")),
 		"effectiveDateTime": date.Format("2006-01-02"),
-		"valueQuantity":     quantity(value, "kg/m2"),
+		"valueQuantity":     quantity(math.Round(value*10)/10, "kg/m2"),
 	}
 }
 

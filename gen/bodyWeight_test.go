@@ -26,7 +26,7 @@ func TestBodyWeight(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	weight := BodyWeight(0, date, 70.0)
+	weight := BodyWeight(0, date, 70.1)
 	assert.Equal(t,
 		"https://fhir.bbmri.de/StructureDefinition/BodyWeight",
 		weight["meta"].(Object)["profile"].(Array)[0])

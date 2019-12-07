@@ -26,7 +26,7 @@ func TestBmi(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	bmi := Bmi(0, date, 42.0)
+	bmi := Bmi(0, date, 42.55)
 	assert.Equal(t,
 		"https://fhir.bbmri.de/StructureDefinition/Bmi",
 		bmi["meta"].(Object)["profile"].(Array)[0])
@@ -35,7 +35,7 @@ func TestBmi(t *testing.T) {
 	assert.Equal(t, "http://loinc.org", bmi["code"].(Object)["coding"].(Array)[0].(Object)["system"])
 	assert.Equal(t, "39156-5", bmi["code"].(Object)["coding"].(Array)[0].(Object)["code"])
 	assert.Equal(t, "2019-07-30", bmi["effectiveDateTime"])
-	assert.Equal(t, 42.0, bmi["valueQuantity"].(Object)["value"])
+	assert.Equal(t, 42.6, bmi["valueQuantity"].(Object)["value"])
 	assert.Equal(t, "kg/m2", bmi["valueQuantity"].(Object)["unit"])
 	assert.Equal(t, "kg/m2", bmi["valueQuantity"].(Object)["code"])
 	assert.Equal(t, "http://unitsofmeasure.org", bmi["valueQuantity"].(Object)["system"])
