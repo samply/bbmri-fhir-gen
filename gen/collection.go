@@ -37,7 +37,7 @@ func Collection(idx int) Object {
 		},
 		"identifier": Array{Object{
 			"system": "http://www.bbmri-eric.eu/",
-			"value":  "bbmri-eric:ID:de_12345:collection:vampir",
+			"value":  fmt.Sprintf("bbmri-eric:ID:de_12345:collection:%d", idx),
 		}},
 		"name":  "Venous and arterial blood from misc patients internal reserve",
 		"alias": Array{"VAMPIR"},
