@@ -26,6 +26,7 @@ import (
 )
 
 var start, n, txSize int
+var seed int64
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -44,7 +45,7 @@ FHIR® Patient, Observation and Specimen resources are generated.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		dir := args[0]
 
-		r := rand.New(rand.NewSource(0))
+		r := rand.New(rand.NewSource(seed))
 
 		err := genBiobankTxFile(dir)
 		if err != nil {
@@ -82,6 +83,7 @@ func init() {
 	rootCmd.Flags().IntVarP(&start, "start", "s", 0, "patient index to start with")
 	rootCmd.Flags().IntVarP(&n, "num", "n", 100, "number of patients to generate")
 	rootCmd.Flags().IntVar(&txSize, "tx-size", 100, "number of patients per transaction")
+	rootCmd.Flags().Int64Var(&seed, "seed", 0, "RNG seed")
 }
 
 func checkDir(dir string) error {
