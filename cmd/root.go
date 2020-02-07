@@ -34,7 +34,7 @@ var rootCmd = &cobra.Command{
 	Short: "BBMRI FHIR Test Data Generator",
 	Long: `Generates FHIR® Bundles with test data. Currently a fix set of 
 FHIR® Patient, Observation and Specimen resources are generated.`,
-	Version:   "0.4.0-alpha.1",
+	Version:   "0.4.0-alpha.2",
 	ValidArgs: []string{"directory"},
 	Args: func(cmd *cobra.Command, args []string) error {
 		if len(args) < 1 {
@@ -111,7 +111,6 @@ func encodeToFile(dir string, filename string, o gen.Object) error {
 		return err
 	}
 	e := json.NewEncoder(f)
-	e.SetIndent("", "  ")
 	err = e.Encode(o)
 	if err1 := f.Close(); err == nil {
 		err = err1
