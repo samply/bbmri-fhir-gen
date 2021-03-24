@@ -27,6 +27,7 @@ import (
 
 var start, n, txSize int
 var seed int64
+var ejprd bool
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -84,6 +85,7 @@ func init() {
 	rootCmd.Flags().IntVarP(&n, "num", "n", 100, "number of patients to generate")
 	rootCmd.Flags().IntVar(&txSize, "tx-size", 100, "number of patients per transaction")
 	rootCmd.Flags().Int64Var(&seed, "seed", 0, "RNG seed")
+	rootCmd.Flags().BoolVarP(&ejprd, "ejprd", "e", false, "add EJP-RD attributes and Resources to the generated FHIR")
 }
 
 func checkDir(dir string) error {
@@ -101,7 +103,7 @@ func genBiobankTxFile(dir string) error {
 }
 
 func genTxFile(dir string, r *rand.Rand, start, n int) error {
-	return encodeToFile(dir, fmt.Sprintf("transaction-%d.json", start), gen.Bundle(r, start, n))
+	return encodeToFile(dir, fmt.Sprintf("transaction-%d.json", start), gen.Bundle(r, start, n, ejprd))
 }
 
 // encodeToFile encodes the JSON object `o` to the file with `filename` in `dir`

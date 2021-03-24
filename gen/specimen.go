@@ -20,8 +20,8 @@ import (
 	"time"
 )
 
-func Specimen(r *rand.Rand, patientIdx int, specimenIdx int, date time.Time) Object {
-	return Object{
+func Specimen(r *rand.Rand, patientIdx int, specimenIdx int, date time.Time, ejprd bool) Object {
+	specimen := Object{
 		"resourceType": "Specimen",
 		"id":           fmt.Sprintf("bbmri-%d-specimen-%d", patientIdx, specimenIdx),
 		"meta":         meta("https://fhir.bbmri.de/StructureDefinition/Specimen"),
@@ -30,6 +30,12 @@ func Specimen(r *rand.Rand, patientIdx int, specimenIdx int, date time.Time) Obj
 		"subject":      patientReference(patientIdx),
 		"collection":   collection(r, date),
 	}
+
+	if ejprd {
+		specimen["status"] = randStatus(r)
+	}
+
+	return specimen
 }
 
 func storageTemp(r *rand.Rand) Object {
@@ -117,4 +123,37 @@ var materialTypes = []string{
 
 func randMaterialType(r *rand.Rand) string {
 	return materialTypes[r.Intn(len(materialTypes))]
+}
+
+var statuses = []string{
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"unavailable",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"unsatisfactory",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+	"available",
+}
+
+func randStatus(r *rand.Rand) string {
+	return statuses[r.Intn(len(statuses))]
 }

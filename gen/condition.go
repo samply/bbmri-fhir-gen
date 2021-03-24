@@ -20,17 +20,116 @@ import (
 	"time"
 )
 
-func Condition(r *rand.Rand, patientIdx int, conditionIdx int, date time.Time) Object {
-	return Object{
+func Condition(r *rand.Rand, patientIdx int, conditionIdx int, date time.Time, ejprd bool) Object {
+	resource := Object{
 		"resourceType":  "Condition",
 		"id":            fmt.Sprintf("bbmri-%d-condition-%d", patientIdx, conditionIdx),
 		"meta":          meta("https://fhir.bbmri.de/StructureDefinition/Condition"),
 		"subject":       patientReference(patientIdx),
-		"code":          codeableConcept(codingWithVersion("http://hl7.org/fhir/sid/icd-10", "2016", randIcd10Code(r))),
+		"code":          generateCodeableConceptCode(r, ejprd),
 		"onsetDateTime": date.Format("2006-01-02"),
 	}
+	if ejprd{
+		resource = Object{
+			"resourceType":  "Condition",
+			"id":            fmt.Sprintf("bbmri-%d-condition-%d", patientIdx, conditionIdx),
+			"meta":          meta("https://fhir.bbmri.de/StructureDefinition/Condition"),
+			"subject":       patientReference(patientIdx),
+			"code":          generateCodeableConceptCode(r, ejprd),
+			"onsetDateTime": date.Format("2006-01-02"),
+			"clinicalStatus":generateCodeableConceptStatus(r, ejprd),
+		}
+	}
+	return resource
 }
 
 func randIcd10Code(r *rand.Rand) string {
 	return fmt.Sprintf("%s%02d.%d", string(65+r.Intn(26)), r.Intn(100), r.Intn(10))
+}
+
+var orphaCodes = [][]string{
+	{"423461","Mucolipidosis type III alpha/beta"},
+	{"1440","Ring chromosome 14 syndrome"},
+	{"1440","Ring chromosome 14 syndrome"},
+	{"1440","Ring chromosome 14 syndrome"},
+	{"778","Rett syndrome - classic rett"},
+	{"98896","Duchenne muscular dystrophy"},
+	{"267","Limb girdle muscular dystrophy type 2A"},
+	{"97242","Congenital myopathy"},
+	{"98895","Becker muscular dystrophy"},
+	{"206549","HyperCKemia"},
+	{"98896","Duchenne muscular dystrophy"},
+	{"2322","Kabuki syndrome"},
+	{"98895","Becker muscular dystrophy"},
+	{"98896","Duchenne muscular dystrophy"},
+	{"104","Leber hereditary optic atrophy (LHON); LHON14484C; MTND6"},
+	{"314051","Combined oxidative phosphorylation deficiency 12; EARS2"},
+	{"321","Multiple Ostechondromas"},
+	{"43","X-linked adrenoleukodystrophy"},
+	{"93545","Duplication of ureter"},
+	{"93545","Congenital vesico-uretero-renal reflux"},
+	{"2133","Haemoglobin variant"},
+	{"848","Beta thalassemia carrier"},
+	{"848","Beta thalassemia carrier"},
+}
+
+func randHpOrphaCode(r *rand.Rand) []string {
+	return orphaCodes[r.Intn(len(orphaCodes))]
+}
+
+func generateCodings(r *rand.Rand, ejprd bool) []Object {
+	icd10Coding := codingWithVersion("http://hl7.org/fhir/sid/icd-10", "2016", randIcd10Code(r))
+	orphaCode := randHpOrphaCode(r)
+	codingCount := 1
+	if ejprd {
+		codingCount = 2
+	}
+	codings := make([] Object, codingCount)
+	codings[0] = icd10Coding
+	if ejprd {
+		orphaCoding := codingDisplay("http://www.orpha.net", orphaCode[0], orphaCode[1])
+		codings[1] = orphaCoding
+	}
+	return codings
+}
+
+func generateCodeableConceptCode(r *rand.Rand, ejprd bool) Object {
+	codings := generateCodings(r, ejprd)
+	concept := codeableConcepts(codings)
+	return concept
+}
+
+var clinicalStatus = []string{
+	"active",
+	"active",
+	"active",
+	"recurrence",
+	"active",
+	"active",
+	"active",
+	"relapse",
+	"active",
+	"active",
+	"active",
+	"inactive",
+	"active",
+	"active",
+	"active",
+	"remission",
+	"active",
+	"active",
+	"active",
+	"resolved",
+	"active",
+	"active",
+	"active",
+}
+
+func randClinicalStatus(r *rand.Rand) string {
+	return clinicalStatus[r.Intn(len(clinicalStatus))]
+}
+
+func generateCodeableConceptStatus(r *rand.Rand, ejprd bool) Object {
+	concept := codeableConcept(coding("http://terminology.hl7.org/CodeSystem/condition-clinical", randClinicalStatus(r)))
+	return concept
 }

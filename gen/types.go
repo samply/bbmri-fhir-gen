@@ -26,8 +26,16 @@ var (
 	vitalSigns = codeableConcept(coding("http://terminology.hl7.org/CodeSystem/observation-category", "vital-signs"))
 )
 
+func wrapInArray(element Object) Array {
+	return Array{element}
+}
+
 func coding(system string, code string) Object {
 	return Object{"system": system, "code": code}
+}
+
+func codingDisplay(system string, code string, display string) Object {
+	return Object{"system": system, "code": code, "display": display}
 }
 
 func bbmriCoding(name string, code string) Object {
@@ -40,6 +48,10 @@ func codingWithVersion(system string, version string, code string) Object {
 
 func codeableConcept(coding Object) Object {
 	return Object{"coding": Array{coding}}
+}
+
+func codeableConcepts(codings []Object) Object {
+	return Object{"coding": codings}
 }
 
 func quantity(value float64, unit string) Object {
