@@ -21,24 +21,15 @@ import (
 )
 
 func Condition(r *rand.Rand, patientIdx int, conditionIdx int, date time.Time, ejprd bool) Object {
-	resource := Object{
-		"resourceType":  "Condition",
-		"id":            fmt.Sprintf("bbmri-%d-condition-%d", patientIdx, conditionIdx),
-		"meta":          meta("https://fhir.bbmri.de/StructureDefinition/Condition"),
-		"subject":       patientReference(patientIdx),
-		"code":          generateCodeableConceptCode(r, ejprd),
-		"onsetDateTime": date.Format("2006-01-02"),
-	}
+	resource := make(map[string]interface{})
+	resource["resourceType"] = "Condition"
+	resource["id"] = fmt.Sprintf("bbmri-%d-condition-%d", patientIdx, conditionIdx)
+	resource["meta"] = meta("https://fhir.bbmri.de/StructureDefinition/Condition")
+	resource["subject"] = patientReference(patientIdx)
+	resource["code"] = generateCodeableConceptCode(r, ejprd)
+	resource["onsetDateTime"] = date.Format("2006-01-02")
 	if ejprd{
-		resource = Object{
-			"resourceType":  "Condition",
-			"id":            fmt.Sprintf("bbmri-%d-condition-%d", patientIdx, conditionIdx),
-			"meta":          meta("https://fhir.bbmri.de/StructureDefinition/Condition"),
-			"subject":       patientReference(patientIdx),
-			"code":          generateCodeableConceptCode(r, ejprd),
-			"onsetDateTime": date.Format("2006-01-02"),
-			"clinicalStatus":generateCodeableConceptStatus(r, ejprd),
-		}
+		resource["clinicalStatus"] = generateCodeableConceptStatus(r, ejprd)
 	}
 	return resource
 }
@@ -99,6 +90,7 @@ func generateCodeableConceptCode(r *rand.Rand, ejprd bool) Object {
 	return concept
 }
 
+// Skew the distribution towards "active".
 var clinicalStatus = []string{
 	"active",
 	"active",

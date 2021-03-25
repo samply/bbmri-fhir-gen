@@ -32,6 +32,7 @@ func FamilyMemberHistory(r *rand.Rand, patientIdx int, patient Object) Object {
 	familyMemeberHistory["name"] = generateRelativeName(r, patient)
 	familyMemeberHistory["condition"] = generateCondition(r)
 	familyNumber := generateFamilyNumber(r)
+	// Give patient and family mamber the same family code
 	familyMemeberHistory["extension"] = familyNumber
 	patient["extension"] = familyNumber
 

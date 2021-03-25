@@ -27,15 +27,14 @@ func Genotype(r *rand.Rand, patientIdx int, time time.Time) Object {
 	Variant["id"] = fmt.Sprintf("bbmri-%d-genotype", patientIdx)
 	Variant["meta"] = meta("https://fhir.bbmri.de/StructureDefinition/Observation")
 	Variant["status"] = "final"
-
 	Variant["subject"] = patientReference(patientIdx)
 	Variant["effectiveDateTime"] = time.Format("2006-01-02")
-//	Variant["extension"] = codeableConcept(codeableConcepts)
 	Variant["extension"] = extension("https://varnomen.hgvs.org/", "valueCodeableConcept", codeableConcepts)
 
 	return Variant
 }
 
+// This is supposed to be HGVS
 var variants = []string{
 	"(14q32.33)(A_14_P117532-->A_14_p135856)x1",
 	"(14q32.33)(A_14_P135580-->A_14_P138389-->A_14_P135856)x1",
@@ -59,10 +58,6 @@ var variants = []string{
 	"TRIM32:c.C1786G:",
 }
 
-/*func randVariant(r *rand.Rand) string {
-	return variants[r.Intn(len(variants))]
-}
-*/
 func randVariants(r *rand.Rand) []string {
 	const maxVariants int = 3
 	variantCount := r.Intn(maxVariants) + 1

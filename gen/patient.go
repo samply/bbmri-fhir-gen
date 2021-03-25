@@ -39,10 +39,6 @@ func Patient(r *rand.Rand, idx int, ejprd bool) Object {
 		patient["identifier"] = generateIdentifier(r)
 		patient["name"] = generateName(r)
 		patient["address"] = generateAddress(r)
-		familyNumber := generateFamilyNumber(r)
-		if familyNumber != nil {
-			patient["extension"] = familyNumber
-		}
 	}
 
 	return patient

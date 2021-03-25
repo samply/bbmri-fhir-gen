@@ -125,6 +125,7 @@ func randMaterialType(r *rand.Rand) string {
 	return materialTypes[r.Intn(len(materialTypes))]
 }
 
+// Skew the distribution towards "available"
 var statuses = []string{
 	"available",
 	"available",

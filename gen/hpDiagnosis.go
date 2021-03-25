@@ -27,7 +27,6 @@ func HpDiagnosis(r *rand.Rand, patientIdx int, time time.Time) Object {
 	hpDiagnosis["id"] = fmt.Sprintf("bbmri-%d-hp-diagnosis", patientIdx)
 	hpDiagnosis["meta"] = meta("https://fhir.bbmri.de/StructureDefinition/Observation")
 	hpDiagnosis["status"] = "final"
-
 	hpDiagnosis["subject"] = patientReference(patientIdx)
 	hpDiagnosis["effectiveDateTime"] = time.Format("2006-01-02")
 	hpDiagnosis["code"] = codeableConcept(codeableConcepts)

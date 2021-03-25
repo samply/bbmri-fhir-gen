@@ -63,6 +63,7 @@ func Bundle(r *rand.Rand, start int, n int, ejprd bool) Object {
 			entries = append(entries, entry(HpDiagnosis(r, i, encounterDate)))
 			entries = append(entries, entry(Genotype(r, i, encounterDate)))
 			if relativeCount == 0 || i%9 == 0 {
+				// Give about 10% of patients a family member
 				entries = append(entries, entry(FamilyMemberHistory(r, i, patient)))
 				relativeCount++
 			}
