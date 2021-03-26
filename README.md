@@ -88,9 +88,22 @@ Flags:
   -s, --start int     patient index to start with
       --tx-size int   number of patients per transaction (default 100)
       --version       version for bbmri-fhir-gen
+  -e, --ejprd         add EJP-RD attributes and Resources to the generated FHIR
 ```
 
 The generator will generate FHIR transaction bundles in JSON format and put each bundle as file in the directory specified. The defaults will generate one transaction bundle called `biobank.json` with biobank and collection resources and one transaction bundle called `transaction-0.json` with 100 patients. If you specify a total number (-n) higher than 100, more than one file will be generated. You can generate additional patients with new identifiers by specifying a custom start value (-s).
+
+## EJP extensions
+
+Using the -e command line option activates an extension that will modify the data model to make it useful for the EJP-RD project.  This basically means adding things that are relevant to rare diseases. Nothing in the original GBA data model is removed, all changes are additive.
+
+The following extra features become available when you use this option:
+
+* A new FHIR-Resource, FamilyMemberHistory, that records information about relatives of a patient.
+* A new code for Observation: Orphanet.
+* A new code for Observation: HP diagnosis.
+* An extension to Observation to hold a Genotype string.
+* Modifications to Patient, primarily to add fake name and address information.
 
 ## License
 
