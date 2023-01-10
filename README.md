@@ -60,7 +60,6 @@ bbmri-fhir-gen is written in Go. All you need is a single binary which is availa
    ```bash
    bbmri-fhir-gen --version
    ```
-   ```
 
 ### macOS - Apple Silicon
 
