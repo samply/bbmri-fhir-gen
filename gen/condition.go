@@ -32,5 +32,5 @@ func Condition(r *rand.Rand, patientIdx int, conditionIdx int, date time.Time) O
 }
 
 func randIcd10Code(r *rand.Rand) string {
-	return fmt.Sprintf("%s%02d.%d", string(65+r.Intn(26)), r.Intn(100), r.Intn(10))
+	return fmt.Sprintf("%s%02d.%d", string(rune(65+r.Intn(26))), r.Intn(100), r.Intn(10))
 }
